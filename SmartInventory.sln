@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E1800CA4-628E-4AF6-B0FD-C69D7BF11360}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartInventory.Domain", "src\SmartInventory.Domain\SmartInventory.Domain.csproj", "{EA92F4E0-C0B7-4E55-AB9E-C5FA8633A640}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartInventory.Application", "src\SmartInventory.Application\SmartInventory.Application.csproj", "{632E45EA-BBEF-428A-B341-84E056FC3F8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartInventory.API", "src\SmartInventory.API\SmartInventory.API.csproj", "{C2095CAF-BA2F-4E86-9FA2-365FB87F043A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E784D6C6-0D95-4DB9-B44B-59D1717F49BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartInventory.Tests", "tests\SmartInventory.Tests\SmartInventory.Tests.csproj", "{9DD63D96-5190-42AB-8569-25A4171604DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA92F4E0-C0B7-4E55-AB9E-C5FA8633A640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA92F4E0-C0B7-4E55-AB9E-C5FA8633A640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA92F4E0-C0B7-4E55-AB9E-C5FA8633A640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA92F4E0-C0B7-4E55-AB9E-C5FA8633A640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{632E45EA-BBEF-428A-B341-84E056FC3F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{632E45EA-BBEF-428A-B341-84E056FC3F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{632E45EA-BBEF-428A-B341-84E056FC3F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{632E45EA-BBEF-428A-B341-84E056FC3F8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2095CAF-BA2F-4E86-9FA2-365FB87F043A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2095CAF-BA2F-4E86-9FA2-365FB87F043A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2095CAF-BA2F-4E86-9FA2-365FB87F043A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2095CAF-BA2F-4E86-9FA2-365FB87F043A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DD63D96-5190-42AB-8569-25A4171604DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DD63D96-5190-42AB-8569-25A4171604DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DD63D96-5190-42AB-8569-25A4171604DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DD63D96-5190-42AB-8569-25A4171604DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EA92F4E0-C0B7-4E55-AB9E-C5FA8633A640} = {E1800CA4-628E-4AF6-B0FD-C69D7BF11360}
+		{632E45EA-BBEF-428A-B341-84E056FC3F8E} = {E1800CA4-628E-4AF6-B0FD-C69D7BF11360}
+		{C2095CAF-BA2F-4E86-9FA2-365FB87F043A} = {E1800CA4-628E-4AF6-B0FD-C69D7BF11360}
+		{9DD63D96-5190-42AB-8569-25A4171604DD} = {E784D6C6-0D95-4DB9-B44B-59D1717F49BA}
+	EndGlobalSection
+EndGlobal

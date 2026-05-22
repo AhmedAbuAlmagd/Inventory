@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: smartinventory-api
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=db;Database=SmartInventoryDb;User Id=sa;Password=${SA_PASSWORD?set in environment};TrustServerCertificate=True;
+      - Jwt__Key=${JWT_KEY?set in environment}
+      - Jwt__Issuer=SmartInventory
+      - Jwt__Audience=SmartInventoryUsers
+      - Jwt__ExpiryHours=8
+      - Jwt__RefreshTokenDays=7
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: smartinventory-db
+    environment:
+      SA_PASSWORD: "${SA_PASSWORD?set in environment}"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "YourStrong@Passw0rd" -Q "SELECT 1" -No
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    volumes:
+      - sqldata:/var/opt/mssql
+    restart: unless-stopped
+
+volumes:
+  sqldata:
