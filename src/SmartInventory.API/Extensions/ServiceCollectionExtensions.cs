@@ -5,6 +5,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.IdentityModel.Tokens;
@@ -155,15 +156,27 @@ public static class ServiceCollectionExtensions
             {
                 Title = "Smart Inventory API",
                 Version = "v1",
-                Description =
-                    "Smart Inventory backend API.\n\n" +
-                    "Key notes:\n" +
-                    "- Authentication: ASP.NET Core Identity + JWT bearer.\n" +
-                    "- Responses: unified ApiResponse envelope (includes requestId and durationMs).\n" +
-                    "- Supports pagination, refresh-token rotation, and rate limiting.",
+                Description = """
+                    A comprehensive **Smart Inventory Management API** built with Clean Architecture.
+
+                    ### Features
+                    - ASP.NET Core Identity authentication + JWT bearer
+                    - Refresh token rotation (reuse detection)
+                    - Server-side pagination where applicable
+                    - Rate limiting for abuse protection
+                    - Unified `ApiResponse<T>` envelope (includes `requestId` and `durationMs`)
+
+                    ### Auth
+                    Use the **Authorize** button with `Bearer {token}`.
+                    """,
                 Contact = new OpenApiContact
                 {
-                    Name = "SmartInventory Backend"
+                    Name = "SmartInventory Backend",
+                    Email = "support@smartinventory.local"
+                },
+                License = new OpenApiLicense
+                {
+                    Name = "MIT"
                 }
             });
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -210,6 +223,11 @@ public static class ServiceCollectionExtensions
             });
 
             c.DocInclusionPredicate((_, api) => !string.IsNullOrWhiteSpace(api.RelativePath));
+
+            c.SupportNonNullableReferenceTypes();
+            c.UseInlineDefinitionsForEnums();
+            c.CustomOperationIds(apiDescription =>
+                apiDescription.ActionDescriptor is ControllerActionDescriptor cad ? cad.MethodInfo.Name : null);
         });
     }
 

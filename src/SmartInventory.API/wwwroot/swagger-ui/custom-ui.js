@@ -1,6 +1,5 @@
 (() => {
   try {
-    document.title = "Smart Inventory API — Swagger";
+    document.title = "Smart Inventory";
   } catch {}
 })();
-
