@@ -48,12 +48,24 @@ public class ProductService : IProductService
         int page,
         int pageSize,
         string? search,
+        string? category,
+        bool? isActive,
+        decimal? minPrice,
+        decimal? maxPrice,
         CancellationToken cancellationToken = default)
     {
         page = page < 1 ? 1 : page;
         pageSize = NormalizePageSize(pageSize, 10, 100);
 
-        var (items, total) = await _unitOfWork.Products.GetPagedAsync(page, pageSize, search, cancellationToken);
+        var (items, total) = await _unitOfWork.Products.GetPagedAsync(
+            page,
+            pageSize,
+            search,
+            category,
+            isActive,
+            minPrice,
+            maxPrice,
+            cancellationToken);
         return new PagedResultDto<ProductDto>
         {
             Items = items.Select(MapToDto).ToArray(),
@@ -150,4 +162,3 @@ public class ProductService : IProductService
         return pageSize;
     }
 }
-

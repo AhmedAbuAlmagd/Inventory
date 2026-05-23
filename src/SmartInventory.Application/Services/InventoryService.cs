@@ -117,16 +117,30 @@ public class InventoryService : IInventoryService
         int pageSize,
         int? productId,
         int? warehouseId,
+        string? type,
+        string? search,
+        DateTime? fromUtc,
+        DateTime? toUtc,
         CancellationToken cancellationToken = default)
     {
         page = page < 1 ? 1 : page;
         pageSize = NormalizePageSize(pageSize, 20, 200);
+
+        TransactionType? parsedType = null;
+        if (!string.IsNullOrWhiteSpace(type) && Enum.TryParse<TransactionType>(type, true, out var txType))
+        {
+            parsedType = txType;
+        }
 
         var (items, total) = await _unitOfWork.Transactions.GetHistoryPagedAsync(
             page,
             pageSize,
             productId,
             warehouseId,
+            parsedType,
+            search,
+            fromUtc,
+            toUtc,
             cancellationToken);
 
         var userIds = items.Select(x => x.CreatedByUserId).Distinct().ToArray();
@@ -171,4 +185,3 @@ public class InventoryService : IInventoryService
         return pageSize;
     }
 }
-

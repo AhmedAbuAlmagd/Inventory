@@ -69,8 +69,21 @@ public class InventoryController : ControllerBase
         [FromQuery] int pageSize = 20,
         [FromQuery] int? productId = null,
         [FromQuery] int? warehouseId = null,
+        [FromQuery] string? type = null,
+        [FromQuery] string? search = null,
+        [FromQuery] DateTime? fromUtc = null,
+        [FromQuery] DateTime? toUtc = null,
         CancellationToken cancellationToken = default)
     {
-        return Ok(await _inventoryService.GetHistoryAsync(page, pageSize, productId, warehouseId, cancellationToken));
+        return Ok(await _inventoryService.GetHistoryAsync(
+            page,
+            pageSize,
+            productId,
+            warehouseId,
+            type,
+            search,
+            fromUtc,
+            toUtc,
+            cancellationToken));
     }
 }

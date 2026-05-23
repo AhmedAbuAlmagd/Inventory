@@ -1,3 +1,4 @@
+using SmartInventory.Domain.Enums;
 using SmartInventory.Domain.Entities;
 
 namespace SmartInventory.Domain.Interfaces;
@@ -16,5 +17,9 @@ public interface IInventoryTransactionRepository : IRepository<InventoryTransact
         int pageSize,
         int? productId,
         int? warehouseId,
+        TransactionType? type,
+        string? search,
+        DateTime? fromUtc,
+        DateTime? toUtc,
         CancellationToken cancellationToken = default);
 }

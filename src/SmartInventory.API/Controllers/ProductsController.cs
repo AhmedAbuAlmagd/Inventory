@@ -33,9 +33,13 @@ public class ProductsController : ControllerBase
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 10,
         [FromQuery] string? search = null,
+        [FromQuery] string? category = null,
+        [FromQuery] bool? isActive = null,
+        [FromQuery] decimal? minPrice = null,
+        [FromQuery] decimal? maxPrice = null,
         CancellationToken cancellationToken = default)
     {
-        return Ok(await _productService.GetAllAsync(page, pageSize, search, cancellationToken));
+        return Ok(await _productService.GetAllAsync(page, pageSize, search, category, isActive, minPrice, maxPrice, cancellationToken));
     }
 
     /// <summary>

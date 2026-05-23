@@ -35,6 +35,10 @@ public class InventoryTransactionRepository : Repository<InventoryTransaction>, 
         int pageSize,
         int? productId,
         int? warehouseId,
+        TransactionType? type,
+        string? search,
+        DateTime? fromUtc,
+        DateTime? toUtc,
         CancellationToken cancellationToken = default)
     {
         var query = DbSet.AsNoTracking()
@@ -52,6 +56,31 @@ public class InventoryTransactionRepository : Repository<InventoryTransaction>, 
             query = query.Where(t => t.WarehouseId == warehouseId.Value);
         }
 
+        if (type.HasValue)
+        {
+            query = query.Where(t => t.Type == type.Value);
+        }
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            var term = search.Trim().ToLower();
+            query = query.Where(t =>
+                t.Product.Name.ToLower().Contains(term) ||
+                t.Product.SKU.ToLower().Contains(term) ||
+                t.Warehouse.Name.ToLower().Contains(term) ||
+                (t.Notes != null && t.Notes.ToLower().Contains(term)));
+        }
+
+        if (fromUtc.HasValue)
+        {
+            query = query.Where(t => t.CreatedAt >= fromUtc.Value);
+        }
+
+        if (toUtc.HasValue)
+        {
+            query = query.Where(t => t.CreatedAt <= toUtc.Value);
+        }
+
         var total = await query.CountAsync(cancellationToken);
         var items = await query
             .OrderByDescending(t => t.CreatedAt)
@@ -62,4 +91,3 @@ public class InventoryTransactionRepository : Repository<InventoryTransaction>, 
         return (items, total);
     }
 }
-

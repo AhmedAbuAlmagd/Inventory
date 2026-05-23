@@ -11,10 +11,13 @@ public interface IProductService
         int page,
         int pageSize,
         string? search,
+        string? category,
+        bool? isActive,
+        decimal? minPrice,
+        decimal? maxPrice,
         CancellationToken cancellationToken = default);
 
     Task<ProductDto> CreateAsync(CreateProductDto dto, CancellationToken cancellationToken = default);
     Task<ProductDto> UpdateAsync(int id, UpdateProductDto dto, CancellationToken cancellationToken = default);
     Task DeleteAsync(int id, CancellationToken cancellationToken = default);
 }
-

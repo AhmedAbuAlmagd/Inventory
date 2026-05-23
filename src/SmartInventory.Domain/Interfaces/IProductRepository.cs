@@ -12,5 +12,9 @@ public interface IProductRepository : IRepository<Product>
         int page,
         int pageSize,
         string? search,
+        string? category,
+        bool? isActive,
+        decimal? minPrice,
+        decimal? maxPrice,
         CancellationToken cancellationToken = default);
 }

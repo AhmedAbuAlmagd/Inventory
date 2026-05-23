@@ -26,9 +26,22 @@ public class ProductRepository : Repository<Product>, IProductRepository
         int page,
         int pageSize,
         string? search,
+        string? category,
+        bool? isActive,
+        decimal? minPrice,
+        decimal? maxPrice,
         CancellationToken cancellationToken = default)
     {
-        var query = DbSet.AsNoTracking().Where(p => p.IsActive).AsQueryable();
+        var query = DbSet.AsNoTracking().AsQueryable();
+
+        if (isActive.HasValue)
+        {
+            query = query.Where(p => p.IsActive == isActive.Value);
+        }
+        else
+        {
+            query = query.Where(p => p.IsActive);
+        }
 
         if (!string.IsNullOrWhiteSpace(search))
         {
@@ -37,6 +50,22 @@ public class ProductRepository : Repository<Product>, IProductRepository
                 p.Name.ToLower().Contains(term) ||
                 p.SKU.ToLower().Contains(term) ||
                 (p.Category != null && p.Category.ToLower().Contains(term)));
+        }
+
+        if (!string.IsNullOrWhiteSpace(category))
+        {
+            var categoryTerm = category.Trim().ToLower();
+            query = query.Where(p => p.Category != null && p.Category.ToLower() == categoryTerm);
+        }
+
+        if (minPrice.HasValue)
+        {
+            query = query.Where(p => p.Price >= minPrice.Value);
+        }
+
+        if (maxPrice.HasValue)
+        {
+            query = query.Where(p => p.Price <= maxPrice.Value);
         }
 
         var total = await query.CountAsync(cancellationToken);

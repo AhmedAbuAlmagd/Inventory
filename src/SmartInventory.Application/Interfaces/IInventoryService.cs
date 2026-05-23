@@ -13,6 +13,9 @@ public interface IInventoryService
         int pageSize,
         int? productId,
         int? warehouseId,
+        string? type,
+        string? search,
+        DateTime? fromUtc,
+        DateTime? toUtc,
         CancellationToken cancellationToken = default);
 }
-
