@@ -7,6 +7,8 @@ public interface IProductService
 {
     Task<ProductDto> GetByIdAsync(int id, CancellationToken cancellationToken = default);
 
+    Task<IEnumerable<string>> GetCategoriesAsync(CancellationToken cancellationToken = default);
+
     Task<PagedResultDto<ProductDto>> GetAllAsync(
         int page,
         int pageSize,

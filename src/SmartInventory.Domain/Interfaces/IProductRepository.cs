@@ -8,6 +8,8 @@ public interface IProductRepository : IRepository<Product>
 
     Task<Product?> GetByIdIncludingInactiveAsync(int id, CancellationToken cancellationToken = default);
 
+    Task<IReadOnlyList<string>> GetCategoriesAsync(CancellationToken cancellationToken = default);
+
     Task<(IReadOnlyList<Product> Items, int TotalCount)> GetPagedAsync(
         int page,
         int pageSize,

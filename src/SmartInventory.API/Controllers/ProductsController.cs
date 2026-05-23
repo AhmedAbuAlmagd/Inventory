@@ -55,6 +55,17 @@ public class ProductsController : ControllerBase
     }
 
     /// <summary>
+    /// Gets all unique product categories.
+    /// </summary>
+    [HttpGet("categories")]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<string>>), 200)]
+    [ProducesResponseType(401)]
+    public async Task<IActionResult> GetCategories(CancellationToken cancellationToken)
+    {
+        return Ok(await _productService.GetCategoriesAsync(cancellationToken));
+    }
+
+    /// <summary>
     /// Creates a new product (Admin only).
     /// </summary>
     [HttpPost]

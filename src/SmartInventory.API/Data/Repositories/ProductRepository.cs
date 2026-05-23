@@ -22,6 +22,16 @@ public class ProductRepository : Repository<Product>, IProductRepository
     public Task<Product?> GetByIdIncludingInactiveAsync(int id, CancellationToken cancellationToken = default) =>
         DbSet.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
+    public async Task<IReadOnlyList<string>> GetCategoriesAsync(CancellationToken cancellationToken = default)
+    {
+        return await DbSet.AsNoTracking()
+            .Where(p => !string.IsNullOrEmpty(p.Category))
+            .Select(p => p.Category!)
+            .Distinct()
+            .OrderBy(c => c)
+            .ToListAsync(cancellationToken);
+    }
+
     public async Task<(IReadOnlyList<Product> Items, int TotalCount)> GetPagedAsync(
         int page,
         int pageSize,

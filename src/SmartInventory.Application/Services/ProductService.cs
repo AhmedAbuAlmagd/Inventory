@@ -44,6 +44,23 @@ public class ProductService : IProductService
         return dto;
     }
 
+    public async Task<IEnumerable<string>> GetCategoriesAsync(CancellationToken cancellationToken = default)
+    {
+        const string cacheKey = "product_categories";
+        if (_cache.TryGetValue(cacheKey, out IEnumerable<string>? cached) && cached is not null)
+        {
+            return cached;
+        }
+
+        var categories = await _unitOfWork.Products.GetCategoriesAsync(cancellationToken);
+        _cache.Set(cacheKey, categories, new MemoryCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1)
+        });
+
+        return categories;
+    }
+
     public async Task<PagedResultDto<ProductDto>> GetAllAsync(
         int page,
         int pageSize,
