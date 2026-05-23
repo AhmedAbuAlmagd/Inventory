@@ -52,6 +52,13 @@ Inventory/
 4. **API Documentation**:
    Once running, access Swagger UI at `http://localhost:5180/swagger`.
 
+## Seeded Credentials
+
+The system comes with pre-seeded users for testing:
+
+- **Admin**: `admin` / `Admin@123`
+- **Employee**: `employee` / `Employee@123`
+
 ## Key Features
 
 - **Product Management**: CRUD operations with search and filter capabilities.
