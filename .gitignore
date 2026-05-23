@@ -1,36 +1,45 @@
-**/bin/
-**/obj/
-**/[Bb]in/
-**/[Oo]bj/
+## .NET Core / Visual Studio GitIgnore
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Tt]est[Rr]esults/
+
+# IDE files
 .vs/
-**/.vs/
 .vscode/
-**/.vscode/
-.idea/
-**/.idea/
 *.user
-*.rsuser
 *.suo
-*.userosscache
 *.sln.docstates
-*.cache
-*.dbmdl
+*.userosscache
+.idea/
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Local configurations
+appsettings.Local.json
+appsettings.Development.json
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Others
 *.bak
 *.tmp
 *.temp
 *.log
-**/TestResults/
-**/.pytest_cache/
-**/.coverage
-**/coverage/
-**/coverage-report/
-**/*.coverage
-**/*.coveragexml
-**/artifacts/
-**/publish/
-**/out/
-**/dist/
-**/node_modules/
-.env
-.env.*
-docker-compose.override.yml
+publish/
+artifacts/
+dist/
+node_modules/
